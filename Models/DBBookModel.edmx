@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BookStoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NameBook" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDCAT" Type="varchar" MaxLength="5" />
+          <Property Name="GIA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BookDescrip" Type="nvarchar" MaxLength="2000" />
+          <Property Name="HinhSach" Type="varchar" MaxLength="200" />
+          <Property Name="IDOrg" Type="varchar" MaxLength="5" />
+          <Property Name="IDCoupon" Type="varchar" MaxLength="5" />
+          <Property Name="IDTG" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NameCate" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coupons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="10" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="HSD" Type="date" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="OrderID" Type="varchar" MaxLength="5" />
+          <Property Name="BookID" Type="varchar" MaxLength="5" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NgayLapDon" Type="datetime" />
+          <Property Name="GiaTong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IDCus" Type="varchar" MaxLength="5" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="200" />
+          <Property Name="PaymentStatus" Type="int" />
+          <Property Name="OrderStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="TacGia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NameAuthor" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TGDescription" Type="nvarchar" MaxLength="2000" />
+          <Property Name="HinhTG" Type="varchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="date" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NameUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="HashedPassword" Type="varchar" MaxLength="256" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="ShippingAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="BirthDate" Type="date" />
+        </EntityType>
+        <Association Name="FK__Book__IDCoupon__5812160E">
+          <End Role="Coupons" Type="Self.Coupons" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDCoupon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__IDOrg__571DF1D5">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDOrg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__IDTG__5629CD9C">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDCAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__IDTG__59063A47">
+          <End Role="TacGia" Type="Self.TacGia" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDTG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__BookI__5FB337D6">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__5EBF139D">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDCus__5BE2A6F2">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDCus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookStoreDBModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupons" EntityType="Self.Coupons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacGia" EntityType="Self.TacGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Book__IDCoupon__5812160E" Association="Self.FK__Book__IDCoupon__5812160E">
+            <End Role="Coupons" EntitySet="Coupons" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__IDOrg__571DF1D5" Association="Self.FK__Book__IDOrg__571DF1D5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__IDTG__5629CD9C" Association="Self.FK__Book__IDTG__5629CD9C">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__IDTG__59063A47" Association="Self.FK__Book__IDTG__59063A47">
+            <End Role="TacGia" EntitySet="TacGia" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__BookI__5FB337D6" Association="Self.FK__OrderDeta__BookI__5FB337D6">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__5EBF139D" Association="Self.FK__OrderDeta__Order__5EBF139D">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDCus__5BE2A6F2" Association="Self.FK__Orders__IDCus__5BE2A6F2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BookStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NameBook" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDCAT" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GIA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BookDescrip" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="HinhSach" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IDOrg" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IDCoupon" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IDTG" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Coupon" Relationship="Self.FK__Book__IDCoupon__5812160E" FromRole="Book" ToRole="Coupons" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Book__IDOrg__571DF1D5" FromRole="Book" ToRole="Users" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Book__IDTG__5629CD9C" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="TacGia" Relationship="Self.FK__Book__IDTG__59063A47" FromRole="Book" ToRole="TacGia" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__BookI__5FB337D6" FromRole="Book" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NameCate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__IDTG__5629CD9C" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="HSD" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__IDCoupon__5812160E" FromRole="Coupons" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__OrderDeta__BookI__5FB337D6" FromRole="OrderDetails" ToRole="Book" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__5EBF139D" FromRole="OrderDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayLapDon" Type="DateTime" Precision="3" />
+          <Property Name="GiaTong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IDCus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentStatus" Type="Int32" />
+          <Property Name="OrderStatus" Type="Int32" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__5EBF139D" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Orders__IDCus__5BE2A6F2" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TacGia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NameAuthor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TGDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="HinhTG" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__IDTG__59063A47" FromRole="TacGia" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NameUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="HashedPassword" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ShippingAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__IDOrg__571DF1D5" FromRole="Users" ToRole="Book" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDCus__5BE2A6F2" FromRole="Users" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK__Book__IDCoupon__5812160E">
+          <End Role="Coupons" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDCoupon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__IDOrg__571DF1D5">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDOrg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__IDTG__5629CD9C">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDCAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__IDTG__59063A47">
+          <End Role="TacGia" Type="Self.TacGia" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="IDTG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__BookI__5FB337D6">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__5EBF139D">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDCus__5BE2A6F2">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDCus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookStoreDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Coupons" EntityType="Self.Coupon" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="TacGias" EntityType="Self.TacGia" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Book__IDCoupon__5812160E" Association="Self.FK__Book__IDCoupon__5812160E">
+            <End Role="Coupons" EntitySet="Coupons" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__IDOrg__571DF1D5" Association="Self.FK__Book__IDOrg__571DF1D5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__IDTG__5629CD9C" Association="Self.FK__Book__IDTG__5629CD9C">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__IDTG__59063A47" Association="Self.FK__Book__IDTG__59063A47">
+            <End Role="TacGia" EntitySet="TacGias" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__BookI__5FB337D6" Association="Self.FK__OrderDeta__BookI__5FB337D6">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__5EBF139D" Association="Self.FK__OrderDeta__Order__5EBF139D">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDCus__5BE2A6F2" Association="Self.FK__Orders__IDCus__5BE2A6F2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BookStoreDBModelStoreContainer" CdmEntityContainer="BookStoreDBEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="BookStoreDBModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameBook" ColumnName="NameBook" />
+                <ScalarProperty Name="IDCAT" ColumnName="IDCAT" />
+                <ScalarProperty Name="GIA" ColumnName="GIA" />
+                <ScalarProperty Name="BookDescrip" ColumnName="BookDescrip" />
+                <ScalarProperty Name="HinhSach" ColumnName="HinhSach" />
+                <ScalarProperty Name="IDOrg" ColumnName="IDOrg" />
+                <ScalarProperty Name="IDCoupon" ColumnName="IDCoupon" />
+                <ScalarProperty Name="IDTG" ColumnName="IDTG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="BookStoreDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameCate" ColumnName="NameCate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupons">
+            <EntityTypeMapping TypeName="BookStoreDBModel.Coupon">
+              <MappingFragment StoreEntitySet="Coupons">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="HSD" ColumnName="HSD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="BookStoreDBModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="BookStoreDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NgayLapDon" ColumnName="NgayLapDon" />
+                <ScalarProperty Name="GiaTong" ColumnName="GiaTong" />
+                <ScalarProperty Name="IDCus" ColumnName="IDCus" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TacGias">
+            <EntityTypeMapping TypeName="BookStoreDBModel.TacGia">
+              <MappingFragment StoreEntitySet="TacGia">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameAuthor" ColumnName="NameAuthor" />
+                <ScalarProperty Name="TGDescription" ColumnName="TGDescription" />
+                <ScalarProperty Name="HinhTG" ColumnName="HinhTG" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BookStoreDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameUser" ColumnName="NameUser" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

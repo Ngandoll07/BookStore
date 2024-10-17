@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="409007eac3a14e36b7386cccbef1fcf0" Name="Diagram1">
+        <EntityTypeShape EntityType="BookStoreDBModel.Book" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.Coupon" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.OrderDetail" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.Order" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.TacGia" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreDBModel.User" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="BookStoreDBModel.FK__Book__IDCoupon__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__Book__IDOrg__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__Book__IDTG__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__Book__IDTG__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__OrderDeta__BookI__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__OrderDeta__Order__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreDBModel.FK__Orders__IDCus__5BE2A6F2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

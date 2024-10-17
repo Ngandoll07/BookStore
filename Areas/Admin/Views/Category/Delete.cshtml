@@ -1,0 +1,37 @@
+﻿@model BookStore.Models.Category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h2>Xác nhận xóa danh mục</h2>
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">Xác nhận xóa danh mục</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Xóa</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Bạn có chắc chắn muốn xóa danh mục này không?</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>ID:</strong> @Model.ID</p>
+            <p><strong>Tên loại:</strong> @Model.NameCate</p>
+            @using (Html.BeginForm("DeleteConfirmed", "Category", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.ID)
+                <button type="submit" class="btn btn-danger">Xóa</button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Quay lại</a>
+            }
+        </div>
+    </div>
+</div>

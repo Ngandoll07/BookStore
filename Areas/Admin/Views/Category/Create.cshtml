@@ -1,0 +1,45 @@
+﻿@model BookStore.Models.Category
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title"> Thêm mới danh mục </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin thêm mới danh mục </h3>
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "Category", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label for="ID">ID</label>
+                    @Html.TextBoxFor(x => x.ID, new { @class = "form-control", @placeholder = "ID danh mục" })
+                    @Html.ValidationMessageFor(x => x.ID, null, new { @class = "text-danger" })
+                </div>
+                    <div class="form-group">
+                        <label for="NameCate">Tên loại</label>
+                        @Html.TextBoxFor(x => x.NameCate, new { @class = "form-control", @placeholder = "Tên danh mục" })
+                        @Html.ValidationMessageFor(x => x.NameCate, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <a href="/admin/book" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

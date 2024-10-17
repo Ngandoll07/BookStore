@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BookStoreDBModelStoreContainer" CdmEntityContainer="BookStoreDBEntities">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="BookStoreDBModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NameBook" ColumnName="NameBook" />
+          <ScalarProperty Name="IDCAT" ColumnName="IDCAT" />
+          <ScalarProperty Name="GIA" ColumnName="GIA" />
+          <ScalarProperty Name="BookDescrip" ColumnName="BookDescrip" />
+          <ScalarProperty Name="HinhSach" ColumnName="HinhSach" />
+          <ScalarProperty Name="IDOrg" ColumnName="IDOrg" />
+          <ScalarProperty Name="IDCoupon" ColumnName="IDCoupon" />
+          <ScalarProperty Name="IDTG" ColumnName="IDTG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="BookStoreDBModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NameCate" ColumnName="NameCate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coupons">
+      <EntityTypeMapping TypeName="BookStoreDBModel.Coupon">
+        <MappingFragment StoreEntitySet="Coupons">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="HSD" ColumnName="HSD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="BookStoreDBModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="BookStoreDBModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NgayLapDon" ColumnName="NgayLapDon" />
+          <ScalarProperty Name="GiaTong" ColumnName="GiaTong" />
+          <ScalarProperty Name="IDCus" ColumnName="IDCus" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TacGias">
+      <EntityTypeMapping TypeName="BookStoreDBModel.TacGia">
+        <MappingFragment StoreEntitySet="TacGia">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NameAuthor" ColumnName="NameAuthor" />
+          <ScalarProperty Name="TGDescription" ColumnName="TGDescription" />
+          <ScalarProperty Name="HinhTG" ColumnName="HinhTG" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="BookStoreDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NameUser" ColumnName="NameUser" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
