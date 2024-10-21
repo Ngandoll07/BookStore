@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.Category>
+﻿@model IEnumerable<BookStore.Models.TacGia>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -24,8 +24,11 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Id danh mục</th>
-                    <th>Loại</th>
+                    <th>ID tác giả</th>
+                    <th>Tên tác giả</th>
+                    <th>Ngày sinh</th>
+                    <th>Mô tả</th>
+                    <th>Hình</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,11 +40,23 @@
                         <tr>
                             <td>@i</td>
                             <td>@item.ID</td>
-                            <td>@item.NameCate</td>
+                            <td>@item.NameAuthor</td>
+                            <td>@item.NgaySinh</td>
+                            <td>@item.TGDescription</td>
                             <td>
-                                <a href="/admin/category/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
-                                <a href="/admin/category/Delete/@item.ID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Xóa</a>
-
+                                @if (!string.IsNullOrEmpty(item.HinhTG))
+                                {
+                                    <img src="@Url.Content(item.HinhTG)" alt="TacGia Image" width="100" height="150" />
+                                }
+                                else
+                                {
+                                    <span>Không có hình</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="/admin/tacgia/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
+                                <a href="/admin/tacgia/delete/@item.ID" class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Bạn có chắc chắn muốn xóa tác giả này?');">Xóa</a>
                             </td>
                         </tr>
                         i++;
@@ -63,4 +78,3 @@
     </div>
     <!--/.card-footer-->
 </div>
-

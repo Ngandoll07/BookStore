@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.Category>
+﻿@model BookStore.Models.Book
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -7,11 +7,11 @@
 <h2>Index</h2>
 <div class="content-wrapper">
     <div class="page-header">
-        <h3 class="page-title"> Quản lý danh mục sách </h3>
+        <h3 class="page-title"> Quản lý sách </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/admin/home/index">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Quản lý danh mục sách</li>
+                <li class="breadcrumb-item active" aria-current="page">Quản lý sách</li>
             </ol>
         </nav>
     </div>
@@ -24,12 +24,18 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Id danh mục</th>
-                    <th>Loại</th>
+                    <th>Tên sách</th>
+                    <th>Tác giả</th>
+                    <th>IDLoai</th>
+                    <th>Giá</th>
+                    <th>Mô tả</th>
+                    <th>Ảnh</th>
+                    <th>ID đại lý</th>
+                    <th>Mã được áp dụng</th>
                 </tr>
             </thead>
             <tbody>
-                @if (Model != null && Model.Any())
+                @*@if (Model != null && Model.Any())
                 {
                     var i = 1;
                     foreach (var item in Model)
@@ -48,11 +54,11 @@
                     }
                 }
                 else
-                {
+                {*@
                     <tr>
                         <td colspan="6">Không có bản ghi nào</td>
                     </tr>
-                }
+                @*}*@
             </tbody>
 
         </table>
@@ -63,4 +69,3 @@
     </div>
     <!--/.card-footer-->
 </div>
-

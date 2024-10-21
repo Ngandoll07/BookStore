@@ -1,0 +1,65 @@
+﻿@model BookStore.Models.TacGia
+
+@{
+    ViewBag.Title = "Edit TacGia";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit TacGia</h2>
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title"> Thêm mới danh mục </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin thêm mới danh mục </h3>
+            <div class="card-body">
+                @using (Html.BeginForm("Edit", "TacGia", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.ID)
+
+                    <div class="form-group">
+                        <label for="NameAuthor">Tên tác giả</label>
+                        @Html.TextBoxFor(x => x.NameAuthor, new { @class = "form-control", @placeholder = "Tên Tác giả" })
+                        @Html.ValidationMessageFor(x => x.NameAuthor, null, new { @class = "text-danger" })
+                    </div><div class="form-group">
+                        <label for="TGDescription">Mô tả</label>
+                        @Html.TextBoxFor(x => x.TGDescription, new { @class = "form-control", @placeholder = "Mô tả" })
+                        @Html.ValidationMessageFor(x => x.TGDescription, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Ảnh hiện tại:</label><br />
+                        @if (!string.IsNullOrEmpty(Model.HinhTG))
+                        {
+                            <img src="@Url.Content(Model.HinhTG)" width="100" height="100" />
+                        }
+                        else
+                        {
+                            <span>Không có hình</span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Cập nhật ảnh mới:")
+                        <input type="file" name="HinhTG" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="NgaySinh">Ngày sinh</label>
+                        @Html.TextBoxFor(x => x.NgaySinh, new { @class = "form-control", @placeholder = "Ngày sinh" })
+                        @Html.ValidationMessageFor(x => x.NgaySinh, null, new { @class = "text-danger" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Lưu</button>
+                    <a href="@Url.Action("Index", "TacGia")" class="btn btn-secondary ">Quay lại</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

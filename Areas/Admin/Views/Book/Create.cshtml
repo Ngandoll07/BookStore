@@ -1,0 +1,87 @@
+﻿@model BookStore.Models.Book
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title"> Thêm mới sách </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Sách</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin thêm mới sách</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="ID">ID</label>
+                    @Html.TextBoxFor(x => x.ID, new { @class = "form-control", @placeholder = "ID sách" })
+                    @Html.ValidationMessageFor(x => x.ID, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label for="NameBook">Tên sách</label>
+                    @Html.TextBoxFor(x => x.NameBook, new { @class = "form-control", @placeholder = "Tên sách" })
+                    @Html.ValidationMessageFor(x => x.NameBook, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="IDCat">Thể loại</label>
+                    @Html.DropDownListFor(x => x.IDCAT, (SelectList)ViewBag.Categories, "Chọn thể loại", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.IDCAT, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="BookDescrip">Mô tả</label>
+                    @Html.TextAreaFor(x => x.BookDescrip, new { @class = "form-control", @placeholder = "Mô tả sách", rows = 3 })
+                    @Html.ValidationMessageFor(x => x.BookDescrip, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="HinhSachFile">Hình sách</label>
+                    <input type="file" name="HinhSachFile" class="form-control" />
+                    @Html.ValidationMessage("HinhSachFile", null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label for="IDOrg">Nhà phân phối</label>
+                    @Html.TextBoxFor(x => x.IDOrg, new { @class = "form-control", @placeholder = "ID nhà phân phối" })
+                    @Html.ValidationMessageFor(x => x.IDOrg, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label for="IDTG">Tác giả</label>
+                    @Html.TextBoxFor(x => x.TacGia.NameAuthor, new { @class = "form-control", @placeholder = "ID tác giả" })
+                    @Html.ValidationMessageFor(x => x.TacGia.NameAuthor, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label for="IDCoupon">Mã giảm giá</label>
+                    @Html.TextBoxFor(x => x.IDCoupon, new { @class = "form-control", @placeholder = "ID mã giảm giá" })
+                    @Html.ValidationMessageFor(x => x.IDCoupon, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label for="GIA">Giá</label>
+                    @Html.TextBoxFor(x => x.GIA, new { @class = "form-control", @placeholder = "ID mã giảm giá" })
+                    @Html.ValidationMessageFor(x => x.GIA, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <a href="/admin/book" class="btn btn-danger">Quay lại</a>
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
