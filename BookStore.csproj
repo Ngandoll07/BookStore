@@ -871,6 +871,8 @@
     <Content Include="Areas\Admin\Views\TacGia\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TacGia\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TacGia\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

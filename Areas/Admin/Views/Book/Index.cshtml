@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.Book
+﻿@model IEnumerable<BookStore.Models.Book>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -16,7 +16,7 @@
         </nav>
     </div>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a href="@Url.Action("Create", "Book")" class="btn btn-primary">Create New</a>
     </p>
 
     <div class="card-body">
@@ -30,23 +30,38 @@
                     <th>Giá</th>
                     <th>Mô tả</th>
                     <th>Ảnh</th>
-                    <th>ID đại lý</th>
+                    <th>ID org</th>
                     <th>Mã được áp dụng</th>
                 </tr>
             </thead>
             <tbody>
-                @*@if (Model != null && Model.Any())
+                @if (Model != null && Model.Any())
                 {
                     var i = 1;
                     foreach (var item in Model)
                     {
                         <tr>
                             <td>@i</td>
-                            <td>@item.ID</td>
-                            <td>@item.NameCate</td>
+                            <td>@item.NameBook</td>
+                            <td>@item.IDTG</td>
+                            <td>@item.IDCAT</td>
+                            <td>@item.GIA</td>
+                            <td>@item.BookDescrip</td>
                             <td>
-                                <a href="/admin/category/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
-                                <a href="/admin/category/Delete/@item.ID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Xóa</a>
+                                @if (!string.IsNullOrEmpty(item.HinhSach))
+                                {
+                                    <img src="@Url.Content(item.HinhSach)" alt="TacGia Image" width="100" height="150" />
+                                }
+                                else
+                                {
+                                    <span>Không có hình</span>
+                                }
+                            </td>
+                            <td>@item.IDOrg</td>
+                            <td>@item.IDCoupon</td>
+                            <td>
+                                <a href="/admin/book/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
+                                <a href="/admin/book/Delete/@item.ID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Xóa</a>
 
                             </td>
                         </tr>
@@ -54,11 +69,11 @@
                     }
                 }
                 else
-                {*@
+                {
                     <tr>
                         <td colspan="6">Không có bản ghi nào</td>
                     </tr>
-                @*}*@
+                }
             </tbody>
 
         </table>

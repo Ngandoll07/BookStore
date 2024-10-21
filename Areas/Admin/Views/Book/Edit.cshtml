@@ -1,0 +1,79 @@
+﻿@model BookStore.Models.Book
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">Chỉnh sửa sách</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/book/index">Sách</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin danh mục</h3>
+            <div class="card-body">
+                @using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(x => x.ID) <!-- Use a hidden field for the ID -->
+
+
+                    <div class="form-group">
+                        <label for="NameBook">Tên sách</label>
+                        @Html.TextBoxFor(x => x.NameBook, new { @class = "form-control", @placeholder = "Tên sách" })
+                        @Html.ValidationMessageFor(x => x.NameBook, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="IDCat">Thể loại</label>
+                        @Html.DropDownListFor(x => x.IDCAT, (SelectList)ViewBag.Categories, "Chọn thể loại", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.IDCAT, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="BookDescrip">Mô tả</label>
+                        @Html.TextAreaFor(x => x.BookDescrip, new { @class = "form-control", @placeholder = "Mô tả sách", rows = 3 })
+                        @Html.ValidationMessageFor(x => x.BookDescrip, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="HinhSachFile">Hình sách</label>
+                        <input type="file" name="HinhSachFile" class="form-control" />
+                        @Html.ValidationMessage("HinhSachFile", null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="IDOrg">Nhà phân phối</label>
+                        @Html.DropDownListFor(x => x.IDOrg, (SelectList)ViewBag.Orgs, "Chọn nhà phân phối", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.IDOrg, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="IDTG">Tác giả</label>
+                        @Html.DropDownListFor(x => x.IDTG, (SelectList)ViewBag.TacGias, "Chọn tác giả", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.IDTG, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="IDCoupon">Mã giảm giá</label>
+                        @Html.DropDownListFor(x => x.IDCoupon, (SelectList)ViewBag.Coupons, "Chọn mã giảm giá", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.IDCoupon, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="GIA">Giá</label>
+                        @Html.TextBoxFor(x => x.GIA, new { @class = "form-control", @placeholder = "Giá" })
+                        @Html.ValidationMessageFor(x => x.GIA, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <a href="/admin/book" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-success mr-2">Cập nhật</button>
+                    </div>
+                }
+            </div></div>
+    </div>
+</div>

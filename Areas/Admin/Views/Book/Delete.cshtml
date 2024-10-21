@@ -1,0 +1,53 @@
+﻿@model BookStore.Models.Book
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Xác nhận xóa danh mục</h2>
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">Xác nhận xóa danh mục</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/book/index">Sách</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Xóa</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Bạn có chắc chắn muốn xóa danh mục này không?</h3>
+        </div>
+        <div class="card-body">
+            <div>
+                <h4>Sản phẩm: @Model.NameBook</h4>
+                <hr />
+                <p>Bạn có chắc chắn muốn xóa sản phẩm này?</p>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <p><strong>ID:</strong> @Model.ID</p>
+                    <p><strong>Tên sách:</strong> @Model.NameBook</p>
+                    <p><strong>ID tác giả:</strong> @Model.IDTG</p>
+                    <p><strong>ID loại:</strong> @Model.IDCAT</p>
+                    <p><strong>Giá:</strong> @Model.GIA</p>
+                    <dt>Hình</dt>
+                    <dd>
+                        @if (!string.IsNullOrEmpty(Model.HinhSach))
+                        {
+                            <img src="@Url.Content(Model.HinhSach)" width="100" height="100" />
+                        }
+                        else
+                        {
+                            <span>Không có hình</span>
+                        }
+                    </dd>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-default" })
+                }
+            </div>
+        </div>
+    </div>
+</div>

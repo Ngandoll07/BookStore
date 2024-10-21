@@ -10,13 +10,13 @@
         <h3 class="page-title"> Quản lý danh mục sách </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/admin/home/index">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Quản lý danh mục sách</li>
+                <li class="breadcrumb-item"><a href="/admin/home/index">Quản lý tác giả</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tác giả</li>
             </ol>
         </nav>
     </div>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a href="@Url.Action("Create", "TacGia")" class="btn btn-primary">Create New</a>
     </p>
 
     <div class="card-body">

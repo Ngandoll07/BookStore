@@ -10,7 +10,7 @@
         <h3 class="page-title"> Thêm mới sách </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Sách</a></li>
+                <li class="breadcrumb-item"><a href="/admin/book/index">Sách</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
             </ol>
         </nav>
@@ -54,19 +54,18 @@
 
                 <div class="form-group">
                     <label for="IDOrg">Nhà phân phối</label>
-                    @Html.TextBoxFor(x => x.IDOrg, new { @class = "form-control", @placeholder = "ID nhà phân phối" })
+                    @Html.DropDownListFor(x => x.IDOrg, (SelectList)ViewBag.Orgs, "Chọn nhà phân phối", new { @class = "form-control" })
                     @Html.ValidationMessageFor(x => x.IDOrg, null, new { @class = "text-danger" })
                 </div>
-
                 <div class="form-group">
                     <label for="IDTG">Tác giả</label>
-                    @Html.TextBoxFor(x => x.TacGia.NameAuthor, new { @class = "form-control", @placeholder = "ID tác giả" })
-                    @Html.ValidationMessageFor(x => x.TacGia.NameAuthor, null, new { @class = "text-danger" })
+                    @Html.DropDownListFor(x => x.IDTG, (SelectList)ViewBag.TacGias, "Chọn tác giả", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.IDTG, null, new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
                     <label for="IDCoupon">Mã giảm giá</label>
-                    @Html.TextBoxFor(x => x.IDCoupon, new { @class = "form-control", @placeholder = "ID mã giảm giá" })
+                    @Html.DropDownListFor(x => x.IDCoupon, (SelectList)ViewBag.Coupons, "Chọn mã giảm giá", new { @class = "form-control" })
                     @Html.ValidationMessageFor(x => x.IDCoupon, null, new { @class = "text-danger" })
                 </div>
 
