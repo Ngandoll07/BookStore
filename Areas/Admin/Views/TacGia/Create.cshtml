@@ -19,7 +19,7 @@
         <div class="card-header">
             <h3 class="card-title">Thông tin thêm mới danh mục </h3>
             <div class="card-body">
-                @using (Html.BeginForm("Create", "TacGia", FormMethod.Post))
+                @using (Html.BeginForm("Create", "TacGia", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
